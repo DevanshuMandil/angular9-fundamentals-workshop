@@ -31,17 +31,29 @@
                     Select Course
                 </mat-card-title>
             </mat-card-header>
+            <form #form="ngForm" (submit)="saveCourse()">
             <mat-card-content>
 
             <!-- COURSE FORM -->
-            <pre *ngIf="selectedCourse">{{selectedCourse | json}}</pre>
+            <mat-form-field>
+                <input matInput name="title" type="text" placeholder="title" required [(ngModel)]="selectedCourse.title">
+            </mat-form-field>
 
+            <mat-form-field>
+                <input matInput name="description" type="text" placeholder="description" required [(ngModel)]="selectedCourse.description">
+            </mat-form-field>
             </mat-card-content>
             <mat-card-actions>
 
+                <button [disabled]="form.invalid" type="submit" mat-button color="primary">Submit</button>
+                <button type="button" mat-button (click)="cancel()">Cancel</button>
             <!-- COURSE ACTIONS -->
 
             </mat-card-actions>
+        </form>
+
+        <pre>{{form.value | json}}</pre>
+        <pre>{{form.valid | json}}</pre>
         </mat-card>
     </div>
 </div>
